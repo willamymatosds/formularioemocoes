@@ -3,85 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pesquisa de Avaliação de Emoção</title>
+    <title>Pesquisa de Avaliação de Emoção - Gráfico</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
             margin: 0;
             padding: 0;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #f4f4f4;
+            flex-direction: column;
         }
-        h1, h2 {
+        h1 {
             color: #333;
+            font-size: 2em;
             text-align: center;
-        }
-        label {
-            margin-top: 10px;
-            display: block;
-            font-size: 1.2em;
-            text-align: center;
+            margin-bottom: 30px;
         }
         .form-section {
+            width: 100%;
+            max-width: 600px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
             display: none;
         }
         .form-section.active {
             display: block;
         }
-        .slider-container {
-            margin-top: 20px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .slider-wrapper {
+        .button {
             width: 100%;
-            display: flex;
-            justify-content: center; /* Centraliza a escala */
-        }
-        input[type="range"] {
-            width: 80%;  /* Faz o slider ocupar mais espaço */
-            height: 25px; /* Aumenta a altura do slider */
-            -webkit-appearance: none;
-            background: #ddd;
-            border-radius: 10px;
-            outline: none;
-            transition: background 0.2s ease-in-out;
-        }
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: #007BFF;
-            cursor: pointer;
-        }
-        input[type="range"]:active::-webkit-slider-thumb {
-            background: #0056b3;
-        }
-        button {
-            margin-top: 20px;
-            padding: 10px 20px;
+            padding: 15px;
             font-size: 1.2em;
             background-color: #007BFF;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            margin-top: 30px;
         }
-        button:hover {
+        .button:hover {
             background-color: #0056b3;
+        }
+        .graph-container {
+            width: 100%;
+            height: 300px;
+            background-color: #f5f5f5;
+            position: relative;
+            margin-top: 20px;
+            border: 2px solid #ddd;
+        }
+        .axis {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .point {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: #007BFF;
+            border-radius: 50%;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
     <h1>Pesquisa de Avaliação de Emoção</h1>
-    
+
     <!-- Página 1: Introdução e Consentimento -->
     <div class="form-section active" id="page1">
         <h2>Prezado(a) Participante,</h2>
@@ -97,9 +91,7 @@
             <li>Autoriza o uso dos dados fornecidos para os fins descritos.</li>
         </ul>
         <p>Se você tiver dúvidas sobre a pesquisa ou seus direitos como participante, sinta-se à vontade para entrar em contato com os pesquisadores responsáveis pelo e-mail: <a href="mailto:willamymatosds@gmail.com">willamymatosds@gmail.com</a></p>
-        <p>Agradecemos pela sua colaboração!</p>
-
-        <button onclick="nextPage(2)">Próximo</button>
+        <button class="button" onclick="nextPage(2)">Próximo</button>
     </div>
 
     <!-- Página 2: Dados Demográficos -->
@@ -138,48 +130,86 @@
                 <option value="nunca">Nunca</option>
             </select><br>
 
-            <button type="button" onclick="nextPage(3)">Próximo</button>
+            <button class="button" type="button" onclick="nextPage(3)">Próximo</button>
         </form>
     </div>
 
-    <!-- Página 3: Avaliação do Texto -->
+    <!-- Página 3: Avaliação do Texto com Gráfico -->
     <div class="form-section" id="page3">
         <h2>Avaliação do Texto</h2>
         <p>Hoje, me despedi de uma pessoa muito importante na minha vida. O enterro foi silencioso, e o peso da ausência tomou conta de mim. As lágrimas vieram sem que eu pudesse controlá-las. Senti como se uma parte de mim tivesse sido arrancada, deixando um buraco que nunca mais será preenchido. Enquanto as pessoas ao redor também choravam, eu tentava entender como seguir em frente sem aquela pessoa ao meu lado.</p>
 
-        <label for="avaliacao_valencia">Como você avalia a emoção evocada por este texto? (0 = Muito negativa, 10 = Muito positiva)</label><br>
-        <div class="slider-wrapper">
-            <div class="slider-container">
-                <input type="range" id="avaliacao_valencia" name="avaliacao_valencia" min="0" max="10" step="0.5" value="5">
+        <h3>Marque a posição da valência emocional no gráfico abaixo</h3>
+        <div class="graph-container" id="graph">
+            <div class="axis">
+                <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%);">Neutra</div>
+                <div style="position: absolute; top: 50%; left: 0;">Muito Negativa</div>
+                <div style="position: absolute; top: 50%; right: 0;">Muito Positiva</div>
             </div>
+            <div class="point" id="point" style="left: 50%; top: 50%;" draggable="true"></div>
         </div>
 
-        <button type="submit" id="submitForm">Enviar</button>
+        <button class="button" type="button" id="submitForm">Enviar</button>
     </div>
 
     <script>
         let currentPage = 1;
 
         function nextPage(pageNumber) {
-            // Esconde a página atual
             document.getElementById(`page${currentPage}`).classList.remove('active');
-            
-            // Mostra a próxima página
             document.getElementById(`page${pageNumber}`).classList.add('active');
-            
-            // Atualiza o número da página atual
             currentPage = pageNumber;
         }
 
-        // Envio do formulário
-        document.getElementById('submitForm').onclick = function(event) {
-            event.preventDefault();  // Impede o envio padrão do formulário
+        // Gráfico de plano cartesiano
+        const graph = document.getElementById('graph');
+        const point = document.getElementById('point');
+        const submitButton = document.getElementById('submitForm');
 
-            const sliderValue = document.getElementById('avaliacao_valencia').value;
-            const formData = new FormData(document.getElementById('formulario')); // Coleta todos os dados do formulário
-            formData.append('avaliacao_valencia', sliderValue);  // Adiciona o valor do slider
+        let isDragging = false;
 
-            // Envia os dados para o Google Apps Script
+        point.addEventListener('mousedown', function(event) {
+            isDragging = true;
+        });
+
+        document.addEventListener('mousemove', function(event) {
+            if (isDragging) {
+                const rect = graph.getBoundingClientRect();
+                let x = event.clientX - rect.left;
+                let y = event.clientY - rect.top;
+
+                // Garantir que o ponto não saia do gráfico
+                x = Math.max(0, Math.min(x, rect.width));
+                y = Math.max(0, Math.min(y, rect.height));
+
+                point.style.left = `${x - point.offsetWidth / 2}px`;
+                point.style.top = `${y - point.offsetHeight / 2}px`;
+            }
+        });
+
+        document.addEventListener('mouseup', function() {
+            isDragging = false;
+        });
+
+        submitButton.addEventListener('click', function() {
+            const rect = graph.getBoundingClientRect();
+            const xPosition = parseFloat(point.style.left) + point.offsetWidth / 2;
+            const valencia = (xPosition / rect.width) * 10; // escala de 0 a 10
+
+            const idade = document.getElementById('idade').value;
+            const genero = document.getElementById('genero').value;
+            const escolaridade = document.getElementById('escolaridade').value;
+            const falanteNativo = document.getElementById('falante_nativo').value;
+            const frequenciaLeitura = document.getElementById('frequencia_leitura').value;
+
+            const formData = new FormData();
+            formData.append('idade', idade);
+            formData.append('genero', genero);
+            formData.append('escolaridade', escolaridade);
+            formData.append('falante_nativo', falanteNativo);
+            formData.append('frequencia_leitura', frequenciaLeitura);
+            formData.append('avaliacao_valencia', valencia);
+
             fetch('https://script.google.com/macros/s/AKfycbya0zuwdBluziHPA9mW5IXTMRpN6jH_NpFkv3gWbTY/dev', {
                 method: 'POST',
                 body: formData
@@ -187,11 +217,12 @@
             .then(response => response.text())
             .then(data => {
                 alert("Obrigado pela sua resposta!");
+                // Após o envio, você pode redirecionar ou mostrar uma nova página, se necessário.
             })
             .catch(error => {
                 alert("Erro ao enviar resposta. Tente novamente.");
             });
-        };
+        });
     </script>
 </body>
 </html>
