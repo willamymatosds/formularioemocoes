@@ -54,7 +54,7 @@
         }
         .navigation-buttons {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
         }
     </style>
 </head>
@@ -123,7 +123,6 @@
             </div><br><br>
 
             <div class="navigation-buttons">
-                <button type="button" onclick="prevSection(1)">Voltar</button>
                 <button type="button" onclick="enviarRespostas()">Enviar Respostas</button>
             </div>
         </div>
@@ -143,17 +142,6 @@
             document.getElementById("section" + section).classList.add("active");
         }
 
-        function prevSection(section) {
-            // Ocultar todas as seções
-            var sections = document.querySelectorAll(".section");
-            sections.forEach(function(section) {
-                section.classList.remove("active");
-            });
-
-            // Exibir a seção anterior
-            document.getElementById("section" + section).classList.add("active");
-        }
-
         function enviarRespostas() {
             var form = document.getElementById("surveyForm");
             var formData = new FormData(form);
@@ -162,6 +150,10 @@
             formData.forEach((value, key) => {
                 dados[key] = value;
             });
+
+            // Adicionar o valor da escala como uma pontuação
+            var pontuacao = parseFloat(dados["avaliacao_texto1"]);
+            dados["pontuacao"] = pontuacao;
 
             // Enviar para Google Sheets
             fetch("https://script.google.com/macros/s/AKfycbzDYVPGU9TAJLxcJkyRpKQW5RV97zpCkCL-LAU_Xo5h2KKxKb_EH24zQApRIA9tMTf1/exec", {
@@ -183,6 +175,7 @@
 
 </body>
 </html>
+
 
 
 
