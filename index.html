@@ -107,13 +107,7 @@
             </div>
         </div><br><br>
 
-        <!-- Descrição da avaliação -->
-        <div>
-            <label>Descrição da Avaliação:</label>
-            <span id="descricaoPontuacao">Neutra</span>
-        </div>
-
-        <!-- Campo oculto para a descrição -->
+        <!-- Campo oculto para a descrição da avaliação -->
         <input type="hidden" id="pontuacaoTexto1" name="Texto 1" value="Neutra">
 
         <button type="button" onclick="enviarRespostas()">Enviar Respostas</button>
@@ -145,9 +139,8 @@
                 descricao = 'Extremamente Positivo';
             }
 
-            // Atualiza a descrição na interface
-            document.getElementById("descricaoPontuacao").textContent = descricao;
-            document.getElementById("pontuacaoTexto1").value = descricao; // Atualiza o campo oculto
+            // Atualiza o campo oculto com a descrição sem exibir para o participante
+            document.getElementById("pontuacaoTexto1").value = descricao;
         }
 
         // Função para capturar e enviar os dados
@@ -180,7 +173,6 @@
 
 </body>
 </html>
-
 
 
 
