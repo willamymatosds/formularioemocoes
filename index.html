@@ -100,15 +100,21 @@
         <!-- Escala deslizante -->
         <label>Como você avalia a emoção evocada por este texto?</label>
         <div class="slider-container">
-            <input type="range" min="0" max="10" step="0.1" id="sliderTexto1" class="slider">
+            <input type="range" min="0" max="10" step="0.1" id="sliderTexto1" class="slider" onchange="atualizarDescricao()">
             <div class="scale-labels">
                 <span>Negativa</span>
                 <span>Positiva</span>
             </div>
         </div><br><br>
 
-        <!-- Campo oculto para a pontuação -->
-        <input type="hidden" id="pontuacaoTexto1" name="Texto 1" value="5">
+        <!-- Descrição da avaliação -->
+        <div>
+            <label>Descrição da Avaliação:</label>
+            <span id="descricaoPontuacao">Neutra</span>
+        </div>
+
+        <!-- Campo oculto para a descrição -->
+        <input type="hidden" id="pontuacaoTexto1" name="Texto 1" value="Neutra">
 
         <button type="button" onclick="enviarRespostas()">Enviar Respostas</button>
     </form>
@@ -116,16 +122,38 @@
     <p id="mensagem"></p>
 
     <script>
+        // Função para atualizar a descrição conforme o valor da escala
+        function atualizarDescricao() {
+            var valor = document.getElementById("sliderTexto1").value;
+            var descricao = '';
+
+            if (valor <= 1.5) {
+                descricao = 'Muito Negativo';
+            } else if (valor <= 3.0) {
+                descricao = 'Levemente Negativo';
+            } else if (valor <= 4.5) {
+                descricao = 'Negativo';
+            } else if (valor <= 5.5) {
+                descricao = 'Neutro';
+            } else if (valor <= 6.5) {
+                descricao = 'Levemente Positivo';
+            } else if (valor <= 8.0) {
+                descricao = 'Positivo';
+            } else if (valor <= 9.5) {
+                descricao = 'Muito Positivo';
+            } else {
+                descricao = 'Extremamente Positivo';
+            }
+
+            // Atualiza a descrição na interface
+            document.getElementById("descricaoPontuacao").textContent = descricao;
+            document.getElementById("pontuacaoTexto1").value = descricao; // Atualiza o campo oculto
+        }
+
         // Função para capturar e enviar os dados
         function enviarRespostas() {
             var form = document.getElementById("surveyForm");
             var formData = new FormData(form);
-
-            // Captura o valor selecionado na escala (0 a 10)
-            var pontuacaoTexto1 = document.getElementById("sliderTexto1").value;
-
-            // Atualiza o valor do input hidden para enviar a pontuação como "Texto 1"
-            document.getElementById("pontuacaoTexto1").value = pontuacaoTexto1;
 
             // Adiciona os dados do formulário ao objeto 'dados'
             var dados = {};
