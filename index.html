@@ -151,8 +151,8 @@
                 dados[key] = value;
             });
 
-            // Captura a pontuação da escala de 0 a 10
-            var pontuacao = document.getElementById("avaliacao_texto1").value; // Aqui capturamos o valor da escala
+            // Captura a pontuação da escala de 0 a 10 com incrementos de 0.1
+            var pontuacao = parseFloat(document.getElementById("avaliacao_texto1").value); // Captura o valor do slider
             dados["pontuacao"] = pontuacao;  // Adicionamos ao objeto de dados
 
             // Enviar para Google Sheets
