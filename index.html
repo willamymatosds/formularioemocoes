@@ -1,156 +1,99 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avaliação Leitora de Textos Curtos</title>
+    <title>Pesquisa de Avaliação de Emoção</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 600px;
-            margin: auto;
-            padding: 20px;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        h1, h2 {
+            color: #333;
         }
         label {
-            font-weight: bold;
+            margin-top: 10px;
         }
-        .slider-container {
-            position: relative;
-            width: 100%;
+        .form-section {
+            margin-bottom: 30px;
         }
-        .slider {
-            width: 100%;
-            -webkit-appearance: none;
-            appearance: none;
-            background: #ddd;
-            height: 5px;
-            border-radius: 5px;
-            outline: none;
-        }
-        .scale-labels {
+        .rating-container {
             display: flex;
             justify-content: space-between;
-            font-size: 14px;
-            margin-top: 5px;
         }
-        button {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-        button:hover {
-            background-color: #0056b3;
+        .rating-container input {
+            width: 50px;
         }
     </style>
 </head>
 <body>
+    <h1>Pesquisa de Avaliação de Emoção</h1>
+    
+    <!-- Seção 1: Introdução e Consentimento -->
+    <div class="form-section">
+        <h2>Prezado(a) Participante,</h2>
+        <p>Você está sendo convidado(a) a participar de uma pesquisa que envolve a avaliação de textos curtos quanto à emoção que eles evocam. Antes de decidir participar, é importante que você leia e compreenda os termos deste documento.</p>
+        <p><strong>Objetivo da Pesquisa:</strong> O objetivo deste estudo é avaliar as emoções evocadas por diferentes textos.</p>
+        <p><strong>Procedimentos:</strong> Você será solicitado(a) a ler uma série de textos curtos e, em seguida, avaliar a emoção que cada texto evoca.</p>
+        <p><strong>Confidencialidade:</strong> Todas as informações coletadas neste estudo serão tratadas com confidencialidade. Seus dados serão utilizados exclusivamente para fins de pesquisa e análise. Nenhuma informação pessoal que possa identificá-lo(a) será divulgada.</p>
+        <p><strong>Voluntariedade:</strong> Sua participação é totalmente voluntária. Você pode recusar-se a participar ou retirar seu consentimento a qualquer momento, sem qualquer penalidade ou prejuízo.</p>
+        <p><strong>Consentimento:</strong> Ao prosseguir com este formulário, você confirma que:</p>
+        <ul>
+            <li>Compreendeu as informações acima.</li>
+            <li>Concorda em participar voluntariamente desta pesquisa.</li>
+            <li>Autoriza o uso dos dados fornecidos para os fins descritos.</li>
+        </ul>
+        <p>Se você tiver dúvidas sobre a pesquisa ou seus direitos como participante, sinta-se à vontade para entrar em contato com os pesquisadores responsáveis pelo e-mail: <a href="mailto:willamymatosds@gmail.com">willamymatosds@gmail.com</a></p>
+        <p>Agradecemos pela sua colaboração!</p>
+    </div>
 
-    <h2>Avaliação Leitora de Textos Curtos</h2>
+    <!-- Seção 2: Dados Demográficos -->
+    <div class="form-section">
+        <h2>Dados Demográficos</h2>
+        <form id="formulario" action="https://script.google.com/macros/s/AKfycbyVTkC07g-Eb8hpBvFHRZaXTumKblE1n_1frE3IqSiiY6cTN5ztdk9s8pcSi2yvmLYC/exec" method="POST">
+            <label for="idade">Qual a sua idade?</label>
+            <input type="number" id="idade" name="idade" required><br>
 
-    <form id="surveyForm">
-        <!-- Dados Demográficos -->
-        <label>Qual a sua idade?</label>
-        <input type="number" name="idade" required><br><br>
+            <label for="genero">Gênero:</label>
+            <select id="genero" name="genero">
+                <option value="masculino">Masculino</option>
+                <option value="feminino">Feminino</option>
+            </select><br>
 
-        <label>Gênero:</label>
-        <select name="genero" required>
-            <option value="Masculino">Masculino</option>
-            <option value="Feminino">Feminino</option>
-            <option value="Prefiro não informar">Prefiro não informar</option>
-        </select><br><br>
+            <label for="escolaridade">Escolaridade:</label>
+            <select id="escolaridade" name="escolaridade">
+                <option value="ensino_medio_completo">Ensino Médio Completo</option>
+                <option value="ensino_superior_incompleto">Ensino Superior Incompleto</option>
+                <option value="ensino_superior_completo">Ensino Superior Completo</option>
+                <option value="pos_graduacao">Pós-Graduação</option>
+            </select><br>
 
-        <label>Escolaridade:</label>
-        <select name="escolaridade" required>
-            <option value="Ensino Médio Completo">Ensino Médio Completo</option>
-            <option value="Ensino Superior Incompleto">Ensino Superior Incompleto</option>
-            <option value="Ensino Superior Completo">Ensino Superior Completo</option>
-            <option value="Pós-Graduação">Pós-Graduação</option>
-        </select><br><br>
+            <label for="falante_nativo">Você é falante nativo do português?</label>
+            <select id="falante_nativo" name="falante_nativo">
+                <option value="sim">Sim</option>
+                <option value="nao">Não</option>
+            </select><br>
 
-        <label>Você é falante nativo do português?</label>
-        <select name="nativo" required>
-            <option value="Sim">Sim</option>
-            <option value="Não">Não</option>
-        </select><br><br>
+            <label for="frequencia_leitura">Com que frequência você lê livros ou artigos?</label>
+            <select id="frequencia_leitura" name="frequencia_leitura">
+                <option value="diariamente">Diariamente</option>
+                <option value="semanalmente">Semanalmente</option>
+                <option value="mensalmente">Mensalmente</option>
+                <option value="raramente">Raramente</option>
+                <option value="nunca">Nunca</option>
+            </select><br>
 
-        <label>Com que frequência você lê livros ou artigos?</label>
-        <select name="leitura" required>
-            <option value="Diariamente">Diariamente</option>
-            <option value="Semanalmente">Semanalmente</option>
-            <option value="Mensalmente">Mensalmente</option>
-            <option value="Raramente">Raramente</option>
-            <option value="Nunca">Nunca</option>
-        </select><br><br>
+            <!-- Seção 3: Avaliação do Texto -->
+            <h2>Avaliação do Texto</h2>
+            <p>Hoje, me despedi de uma pessoa muito importante na minha vida. O enterro foi silencioso, e o peso da ausência tomou conta de mim. As lágrimas vieram sem que eu pudesse controlá-las. Senti como se uma parte de mim tivesse sido arrancada, deixando um buraco que nunca mais será preenchido. Enquanto as pessoas ao redor também choravam, eu tentava entender como seguir em frente sem aquela pessoa ao meu lado.</p>
 
-        <!-- Texto para Avaliação -->
-        <p style="text-align: justify;">
-            Hoje, me despedi de uma pessoa muito importante na minha vida. O enterro foi silencioso, e o peso da ausência tomou conta de mim. 
-            As lágrimas vieram sem que eu pudesse controlá-las. Senti como se uma parte de mim tivesse sido arrancada, deixando um buraco que nunca mais será preenchido. 
-            Enquanto as pessoas ao redor também choravam, eu tentava entender como seguir em frente sem aquela pessoa ao meu lado.
-        </p>
+            <label for="avaliacao_valencia">Como você avalia a emoção evocada por este texto? (0 = Muito negativa, 10 = Muito positiva)</label><br>
+            <input type="number" id="avaliacao_valencia" name="avaliacao_valencia" min="0" max="10" required><br>
 
-        <!-- Escala Deslizante -->
-        <label>Como você avalia a emoção evocada por este texto?</label>
-        <div class="slider-container">
-            <input type="range" min="1" max="10" step="0.1" name="avaliacao_texto1" class="slider">
-            <div class="scale-labels">
-                <span>Negativa</span>
-                <span>Positiva</span>
-            </div>
-        </div><br><br>
-
-        <button type="button" onclick="enviarRespostas()">Enviar Respostas</button>
-    </form>
-
-    <p id="mensagem" style="color: green;"></p>
-
-    <script>
-        function enviarRespostas() {
-            var form = document.getElementById("surveyForm");
-            var formData = new FormData(form);
-            
-            var dados = {};
-            formData.forEach((value, key) => {
-                dados[key] = value;
-            });
-
-            // Enviar para o Google Apps Script
-            fetch("https://script.google.com/macros/s/AKfycbyCHWD7p9nMhqFxGFJ4SRubE3xXSjHS2qw-eooIljMuJyEYKC3vu0czw3uCJFNpIE0n/exec", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(dados)
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Erro ao enviar os dados: " + response.statusText);
-                }
-                return response.text();
-            })
-            .then(result => {
-                console.log("Resposta do servidor:", result);  // Verifique a resposta do servidor
-                document.getElementById("mensagem").textContent = "Respostas enviadas com sucesso!";
-                form.reset(); // Limpar o formulário
-            })
-            .catch((error) => {
-                console.error("Erro:", error);
-                document.getElementById("mensagem").textContent = "Erro ao enviar. Tente novamente.";
-            });
-        }
-    </script>
-
+            <input type="submit" value="Enviar">
+        </form>
+    </div>
 </body>
 </html>
-
-
-
-
-
-
-
