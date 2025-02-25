@@ -71,6 +71,54 @@
             border-radius: 50%;
             cursor: pointer;
         }
+        /* Estilos para a seta */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 10px;
+            height: 100%;
+            background: linear-gradient(to top, #f00 0%, #ff0 100%);
+            transform: translateX(-50%) rotate(90deg);
+            z-index: 1;
+        }
+        .arrow-head {
+            position: absolute;
+            top: -15px;
+            left: -5px;
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 15px solid #007BFF;
+        }
+        .axis-text {
+            position: absolute;
+            font-size: 12px;
+            color: #333;
+        }
+        .negative {
+            left: 5px;
+            top: 50%;
+        }
+        .positive {
+            right: 5px;
+            top: 50%;
+        }
+        .vertical-text {
+            position: absolute;
+            font-size: 12px;
+            color: #333;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .vertical-negative {
+            top: 10%;
+        }
+        .vertical-positive {
+            top: 90%;
+        }
     </style>
 </head>
 <body>
@@ -141,11 +189,17 @@
 
         <h3>Marque a posição da valência emocional no gráfico abaixo</h3>
         <div class="graph-container" id="graph">
-            <div class="axis">
-                <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%);">Neutra</div>
-                <div style="position: absolute; top: 50%; left: 0;">Muito Negativa</div>
-                <div style="position: absolute; top: 50%; right: 0;">Muito Positiva</div>
-            </div>
+            <div class="arrow"></div>
+            <div class="arrow-head"></div>
+            
+            <!-- Textos de Rótulo para eixo horizontal -->
+            <div class="axis-text negative">Negativo</div>
+            <div class="axis-text positive">Positivo</div>
+            
+            <!-- Texto para intensidade vertical -->
+            <div class="vertical-text vertical-negative">Muito Negativo</div>
+            <div class="vertical-text vertical-positive">Pouco Negativo</div>
+            
             <div class="point" id="point" style="left: 50%; top: 50%;" draggable="true"></div>
         </div>
 
@@ -217,7 +271,6 @@
             .then(response => response.text())
             .then(data => {
                 alert("Obrigado pela sua resposta!");
-                // Após o envio, você pode redirecionar ou mostrar uma nova página, se necessário.
             })
             .catch(error => {
                 alert("Erro ao enviar resposta. Tente novamente.");
