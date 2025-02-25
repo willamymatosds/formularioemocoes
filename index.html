@@ -38,6 +38,11 @@
             flex-direction: column;
             align-items: center;
         }
+        .slider-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center; /* Centraliza a escala */
+        }
         input[type="range"] {
             width: 80%;  /* Faz o slider ocupar mais espaço */
             height: 25px; /* Aumenta a altura do slider */
@@ -100,7 +105,7 @@
     <!-- Página 2: Dados Demográficos -->
     <div class="form-section" id="page2">
         <h2>Dados Demográficos</h2>
-        <form id="formulario" action="https://script.google.com/macros/s/AKfycbyVTkC07g-Eb8hpBvFHRZaXTumKblE1n_1frE3IqSiiY6cTN5ztdk9s8pcSi2yvmLYC/exec" method="POST">
+        <form id="formulario">
             <label for="idade">Qual a sua idade?</label>
             <input type="number" id="idade" name="idade" required><br>
 
@@ -143,11 +148,13 @@
         <p>Hoje, me despedi de uma pessoa muito importante na minha vida. O enterro foi silencioso, e o peso da ausência tomou conta de mim. As lágrimas vieram sem que eu pudesse controlá-las. Senti como se uma parte de mim tivesse sido arrancada, deixando um buraco que nunca mais será preenchido. Enquanto as pessoas ao redor também choravam, eu tentava entender como seguir em frente sem aquela pessoa ao meu lado.</p>
 
         <label for="avaliacao_valencia">Como você avalia a emoção evocada por este texto? (0 = Muito negativa, 10 = Muito positiva)</label><br>
-        <div class="slider-container">
-            <input type="range" id="avaliacao_valencia" name="avaliacao_valencia" min="0" max="10" step="0.5" value="5">
+        <div class="slider-wrapper">
+            <div class="slider-container">
+                <input type="range" id="avaliacao_valencia" name="avaliacao_valencia" min="0" max="10" step="0.5" value="5">
+            </div>
         </div>
 
-        <button type="submit">Enviar</button>
+        <button type="submit" id="submitForm">Enviar</button>
     </div>
 
     <script>
@@ -165,15 +172,15 @@
         }
 
         // Envio do formulário
-        document.getElementById('formulario').onsubmit = function(event) {
+        document.getElementById('submitForm').onclick = function(event) {
             event.preventDefault();  // Impede o envio padrão do formulário
 
             const sliderValue = document.getElementById('avaliacao_valencia').value;
-            const formData = new FormData(this); // Coleta todos os dados do formulário
+            const formData = new FormData(document.getElementById('formulario')); // Coleta todos os dados do formulário
             formData.append('avaliacao_valencia', sliderValue);  // Adiciona o valor do slider
 
             // Envia os dados para o Google Apps Script
-            fetch(this.action, {
+            fetch('https://script.google.com/macros/s/AKfycbya0zuwdBluziHPA9mW5IXTMRpN6jH_NpFkv3gWbTY/dev', {
                 method: 'POST',
                 body: formData
             })
@@ -188,4 +195,3 @@
     </script>
 </body>
 </html>
-
