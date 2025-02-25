@@ -1,218 +1,162 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pesquisa de Avaliação de Emoção - Escala de Cor</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-        h1 {
-            color: #333;
-            font-size: 2em;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .form-section {
-            width: 100%;
-            max-width: 600px;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            display: none;
-        }
-        .form-section.active {
-            display: block;
-        }
-        .button {
-            width: 100%;
-            padding: 15px;
-            font-size: 1.2em;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 30px;
-        }
-        .button:hover {
-            background-color: #0056b3;
-        }
-        .scale-container {
-            width: 100%;
-            height: 40px;
-            background: linear-gradient(to right, red, yellow, green, blue);
-            position: relative;
-            margin-top: 20px;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-        }
-        .slider {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 20px;
-            height: 20px;
-            background-color: white;
-            border: 2px solid #007BFF;
-            border-radius: 50%;
-            cursor: pointer;
-            transform: translate(-50%, -50%);
-        }
-        .form-section h2, .form-section p {
-            font-size: 1.2em;
-            margin: 10px 0;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pesquisa de Avaliação Emocional</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+    }
+    label {
+      font-size: 16px;
+      display: block;
+      margin: 10px 0 5px;
+    }
+    select, input[type="text"], input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin: 5px 0 20px;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+    }
+    .slider-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .slider {
+      width: 80%;
+    }
+    .submit-btn {
+      background-color: #4CAF50;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .submit-btn:hover {
+      background-color: #45a049;
+    }
+    .center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
 </head>
 <body>
-    <h1>Pesquisa de Avaliação de Emoção</h1>
 
-    <!-- Página 1: Introdução e Consentimento -->
-    <div class="form-section active" id="page1">
-        <h2>Prezado(a) Participante,</h2>
-        <p>Você está sendo convidado(a) a participar de uma pesquisa que envolve a avaliação de textos curtos quanto à emoção que eles evocam. Antes de decidir participar, é importante que você leia e compreenda os termos deste documento.</p>
-        <p><strong>Objetivo da Pesquisa:</strong> O objetivo deste estudo é avaliar as emoções evocadas por diferentes textos.</p>
-        <p><strong>Procedimentos:</strong> Você será solicitado(a) a ler uma série de textos curtos e, em seguida, avaliar a emoção que cada texto evoca.</p>
-        <p><strong>Confidencialidade:</strong> Todas as informações coletadas neste estudo serão tratadas com confidencialidade. Seus dados serão utilizados exclusivamente para fins de pesquisa e análise. Nenhuma informação pessoal que possa identificá-lo(a) será divulgada.</p>
-        <p><strong>Voluntariedade:</strong> Sua participação é totalmente voluntária. Você pode recusar-se a participar ou retirar seu consentimento a qualquer momento, sem qualquer penalidade ou prejuízo.</p>
-        <p><strong>Consentimento:</strong> Ao prosseguir com este formulário, você confirma que:</p>
-        <ul>
-            <li>Compreendeu as informações acima.</li>
-            <li>Concorda em participar voluntariamente desta pesquisa.</li>
-            <li>Autoriza o uso dos dados fornecidos para os fins descritos.</li>
-        </ul>
-        <p>Se você tiver dúvidas sobre a pesquisa ou seus direitos como participante, sinta-se à vontade para entrar em contato com os pesquisadores responsáveis pelo e-mail: <a href="mailto:willamymatosds@gmail.com">willamymatosds@gmail.com</a></p>
-        <button class="button" onclick="nextPage(2)">Próximo</button>
-    </div>
+  <div class="container">
+    <h1>Pesquisa de Avaliação Emocional</h1>
+    
+    <!-- Dados Demográficos -->
+    <form id="surveyForm" action="https://script.google.com/macros/s/AKfycbz2cc2yIJDbzcL75KCsWxYdA4GsB0rRA6z0_XMCuC62B7x9UJv8mIGLsadGBl3Uxep3/exec" method="POST">
+      <h2>Dados Demográficos</h2>
 
-    <!-- Página 2: Dados Demográficos -->
-    <div class="form-section" id="page2">
-        <h2>Dados Demográficos</h2>
-        <form id="formulario">
-            <label for="idade">Qual a sua idade?</label>
-            <input type="number" id="idade" name="idade" required><br>
+      <label for="idade">Qual a sua idade?</label>
+      <input type="text" id="idade" name="idade" required>
 
-            <label for="genero">Gênero:</label>
-            <select id="genero" name="genero">
-                <option value="masculino">Masculino</option>
-                <option value="feminino">Feminino</option>
-            </select><br>
+      <label for="genero">Gênero:</label>
+      <select id="genero" name="genero" required>
+        <option value="masculino">Masculino</option>
+        <option value="feminino">Feminino</option>
+      </select>
 
-            <label for="escolaridade">Escolaridade:</label>
-            <select id="escolaridade" name="escolaridade">
-                <option value="ensino_medio_completo">Ensino Médio Completo</option>
-                <option value="ensino_superior_incompleto">Ensino Superior Incompleto</option>
-                <option value="ensino_superior_completo">Ensino Superior Completo</option>
-                <option value="pos_graduacao">Pós-Graduação</option>
-            </select><br>
+      <label for="escolaridade">Escolaridade:</label>
+      <select id="escolaridade" name="escolaridade" required>
+        <option value="Ensino Médio Completo">Ensino Médio Completo</option>
+        <option value="Ensino Superior Incompleto">Ensino Superior Incompleto</option>
+        <option value="Ensino Superior Completo">Ensino Superior Completo</option>
+        <option value="Pós-Graduação">Pós-Graduação</option>
+      </select>
 
-            <label for="falante_nativo">Você é falante nativo do português?</label>
-            <select id="falante_nativo" name="falante_nativo">
-                <option value="sim">Sim</option>
-                <option value="nao">Não</option>
-            </select><br>
+      <label for="falante_nativo">Você é falante nativo do português?</label>
+      <select id="falante_nativo" name="falante_nativo" required>
+        <option value="Sim">Sim</option>
+        <option value="Não">Não</option>
+      </select>
 
-            <label for="frequencia_leitura">Com que frequência você lê livros ou artigos?</label>
-            <select id="frequencia_leitura" name="frequencia_leitura">
-                <option value="diariamente">Diariamente</option>
-                <option value="semanalmente">Semanalmente</option>
-                <option value="mensalmente">Mensalmente</option>
-                <option value="raramente">Raramente</option>
-                <option value="nunca">Nunca</option>
-            </select><br>
+      <label for="frequencia_leitura">Com que frequência você lê livros ou artigos?</label>
+      <select id="frequencia_leitura" name="frequencia_leitura" required>
+        <option value="Diariamente">Diariamente</option>
+        <option value="Semanalmente">Semanalmente</option>
+        <option value="Mensalmente">Mensalmente</option>
+        <option value="Raramente">Raramente</option>
+        <option value="Nunca">Nunca</option>
+      </select>
 
-            <button class="button" type="button" onclick="nextPage(3)">Próximo</button>
-        </form>
-    </div>
+      <h2>Avaliação da Valência Emocional do Texto</h2>
+      
+      <div class="center">
+        <p>Como você avalia a emoção evocada por este texto?</p>
+      </div>
 
-    <!-- Página 3: Avaliação do Texto com Escala de Cor -->
-    <div class="form-section" id="page3">
-        <h2>Avaliação do Texto</h2>
-        <p>Hoje, me despedi de uma pessoa muito importante na minha vida. O enterro foi silencioso, e o peso da ausência tomou conta de mim. As lágrimas vieram sem que eu pudesse controlá-las. Senti como se uma parte de mim tivesse sido arrancada, deixando um buraco que nunca mais será preenchido. Enquanto as pessoas ao redor também choravam, eu tentava entender como seguir em frente sem aquela pessoa ao meu lado.</p>
+      <div class="slider-container">
+        <input type="range" id="avaliacao_valencia" name="avaliacao_valencia" min="0" max="10" step="0.5" value="5" class="slider" required>
+      </div>
 
-        <h3>Marque a posição da valência emocional na escala abaixo</h3>
-        <div class="scale-container" id="scale">
-            <div class="slider" id="slider" style="left: 50%;"></div>
-        </div>
+      <div class="center">
+        <p>0 (Muito negativo) - 10 (Muito positivo)</p>
+      </div>
 
-        <button class="button" type="button" id="submitForm">Enviar</button>
-    </div>
+      <input type="submit" value="Enviar Resposta" class="submit-btn">
+    </form>
+  </div>
 
-    <script>
-        let currentPage = 1;
+  <script>
+    // Adicionando um evento de envio para o formulário
+    document.getElementById('surveyForm').addEventListener('submit', function(event) {
+      // Impede o envio tradicional para garantir que a resposta seja enviada para o Apps Script
+      event.preventDefault();
 
-        function nextPage(pageNumber) {
-            document.getElementById(`page${currentPage}`).classList.remove('active');
-            document.getElementById(`page${pageNumber}`).classList.add('active');
-            currentPage = pageNumber;
-        }
+      // Coleta os dados do formulário
+      var idade = document.getElementById('idade').value;
+      var genero = document.getElementById('genero').value;
+      var escolaridade = document.getElementById('escolaridade').value;
+      var falanteNativo = document.getElementById('falante_nativo').value;
+      var frequenciaLeitura = document.getElementById('frequencia_leitura').value;
+      var avaliacaoValencia = document.getElementById('avaliacao_valencia').value;
 
-        // Função de movimentação da escala
-        const scale = document.getElementById('scale');
-        const slider = document.getElementById('slider');
-        let isDragging = false;
+      // Criação do objeto de dados a serem enviados
+      var formData = new FormData();
+      formData.append('idade', idade);
+      formData.append('genero', genero);
+      formData.append('escolaridade', escolaridade);
+      formData.append('falante_nativo', falanteNativo);
+      formData.append('frequencia_leitura', frequenciaLeitura);
+      formData.append('avaliacao_valencia', avaliacaoValencia);
 
-        slider.addEventListener('mousedown', function(event) {
-            isDragging = true;
-        });
+      // Enviar os dados para o Apps Script
+      fetch('https://script.google.com/macros/s/AKfycbz2cc2yIJDbzcL75KCsWxYdA4GsB0rRA6z0_XMCuC62B7x9UJv8mIGLsadGBl3Uxep3/exec', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.text())
+      .then(data => {
+        alert('Obrigado pela sua resposta!');
+        // Redireciona o usuário para uma nova página ou fecha o formulário, por exemplo
+      })
+      .catch(error => {
+        alert('Ocorreu um erro ao enviar os dados. Tente novamente.');
+        console.error('Erro:', error);
+      });
+    });
+  </script>
 
-        document.addEventListener('mousemove', function(event) {
-            if (isDragging) {
-                const rect = scale.getBoundingClientRect();
-                let x = event.clientX - rect.left;
-                x = Math.max(0, Math.min(x, rect.width));
-                slider.style.left = `${x - slider.offsetWidth / 2}px`;
-            }
-        });
-
-        document.addEventListener('mouseup', function() {
-            isDragging = false;
-        });
-
-        // Enviar dados para o Google Spreadsheet
-        document.getElementById('submitForm').addEventListener('click', function() {
-            const rect = scale.getBoundingClientRect();
-            const xPosition = parseFloat(slider.style.left) + slider.offsetWidth / 2;
-            const valencia = (xPosition / rect.width) * 10; // valor entre 0 e 10
-
-            const idade = document.getElementById('idade').value;
-            const genero = document.getElementById('genero').value;
-            const escolaridade = document.getElementById('escolaridade').value;
-            const falanteNativo = document.getElementById('falante_nativo').value;
-            const frequenciaLeitura = document.getElementById('frequencia_leitura').value;
-
-            const formData = new FormData();
-            formData.append('idade', idade);
-            formData.append('genero', genero);
-            formData.append('escolaridade', escolaridade);
-            formData.append('falante_nativo', falanteNativo);
-            formData.append('frequencia_leitura', frequenciaLeitura);
-            formData.append('avaliacao_valencia', valencia);
-
-            fetch('https://script.google.com/macros/s/AKfycbya0zuwdBluziHPA9mW5IXTMRpN6jH_NpFkv3gWbTY/dev', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                alert("Obrigado pela sua resposta!");
-            })
-            .catch(error => {
-                alert("Erro ao enviar resposta. Tente novamente.");
-            });
-        });
-    </script>
 </body>
 </html>
