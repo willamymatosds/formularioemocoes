@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação leitora de textos curtos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+        .pagina {
+            display: none;
+        }
+        .pagina.ativa {
+            display: block;
+        }
+        select, input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 8px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .campo {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .texto-justificado {
+            text-align: justify;
+        }
+        .slider-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .slider {
+            width: 100%;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 8px;
+            background: #ddd;
+            border-radius: 5px;
+            outline: none;
+        }
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #4CAF50;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+        }
+        .ticks {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-top: -10px;
+        }
+        .ticks span {
+            width: 2px;
+            height: 10px;
+            background-color: black;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Página 1: Termo de Consentimento -->
+        <div id="pagina1" class="pagina ativa">
+            <h2>Avaliação leitora de textos curtos</h2>
+            <p><strong>Prezado(a) Participante,</strong></p>
+            <p>Você está sendo convidado(a) a participar de uma pesquisa que envolve a avaliação de textos curtos quanto à emoção que eles evocam...</p>
+
+            <div class="campo">
+                <label>Declaro que li e compreendi os termos acima e que aceito participar desta pesquisa.</label>
+                <select id="consentimento">
+                    <option value="nao">Discordo</option>
+                    <option value="sim">Concordo</option>
+                </select>
+            </div>
+
+            <button onclick="verificarConsentimento()">Próximo</button>
+        </div>
+
+        <!-- Página 2: Dados do Participante -->
+        <div id="pagina2" class="pagina">
+            <h2>Dados do participante</h2>
+            <p>Antes de iniciar a avaliação dos textos, gostaríamos de coletar algumas informações demográficas...</p>
+
+            <div class="campo">
+                <label for="idade">Qual a idade?</label>
+                <input type="number" id="idade" min="18" max="100">
+            </div>
+
+            <div class="campo">
+                <label for="genero">Gênero:</label>
+                <select id="genero">
+                    <option value="masculino">Masculino</option>
+                    <option value="feminino">Feminino</option>
+                    <option value="nao_informar">Prefiro não informar</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label for="escolaridade">Escolaridade:</label>
+                <select id="escolaridade">
+                    <option value="medio">Ensino médio completo</option>
+                    <option value="superior_incompleto">Ensino superior incompleto</option>
+                    <option value="superior_completo">Ensino superior completo</option>
+                    <option value="pos">Pós-graduação</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label>Você é falante nativo do português?</label>
+                <select id="falante">
+                    <option value="sim">Sim</option>
+                    <option value="nao">Não</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label>Com que frequência você lê livros ou artigos?</label>
+                <select id="frequencia">
+                    <option value="diariamente">Diariamente</option>
+                    <option value="semanalmente">Semanalmente</option>
+                    <option value="mensalmente">Mensalmente</option>
+                    <option value="raramente">Raramente</option>
+                    <option value="nunca">Nunca</option>
+                </select>
+            </div>
+
+            <button onclick="proximaPagina(3)">Próximo</button>
+        </div>
+
+        <!-- Página 3: Introdução à Leitura -->
+        <div id="pagina3" class="pagina">
+            <h2>Leitura dos textos</h2>
+            <p>A seguir, você encontrará uma série de textos curtos que deverão ser lidos com atenção...</p>
+            <button onclick="proximaPagina(4)">Iniciar</button>
+        </div>
+
+        <!-- Página 4: Texto e Escala -->
+        <div id="pagina4" class="pagina">
+            <h2>Texto 1</h2>
+            <p class="texto-justificado">
+                "Hoje, me despedi de uma pessoa muito importante na minha vida. O enterro foi silencioso, e o peso da ausência tomou conta de mim. 
+                As lágrimas vieram sem que eu pudesse controlá-las. Senti como se uma parte de mim tivesse sido arrancada, deixando um buraco que nunca mais será preenchido. 
+                Enquanto as pessoas ao redor também choravam, eu tentava entender como seguir em frente sem aquela pessoa ao meu lado."
+            </p>
+
+            <div class="slider-container">
+                <label>Como você avalia a emoção evocada por este texto?</label>
+                <input type="range" min="1" max="5" step="0.1" class="slider" id="escala1">
+                <div class="ticks">
+                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <div class="labels">
+                    <span>Negativa</span>
+                    <span>Positiva</span>
+                </div>
+            </div>
+
+            <button onclick="proximaPagina(5)">Próximo</button>
+        </div>
+    </div>
+
+    <script>
+        function verificarConsentimento() {
+            let consentimento = document.getElementById("consentimento").value;
+            if (consentimento === "sim") {
+                document.getElementById("pagina1").classList.remove("ativa");
+                document.getElementById("pagina2").classList.add("ativa");
+            } else {
+                alert("Você precisa concordar com os termos para continuar.");
+            }
+        }
+
+        function proximaPagina(pagina) {
+            let paginas = document.querySelectorAll(".pagina");
+            paginas.forEach(p => p.classList.remove("ativa"));
+            document.getElementById("pagina" + pagina).classList.add("ativa");
+        }
+    </script>
+
+</body>
+</html>
+
+
