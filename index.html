@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avaliação leitora de textos curtos</title>
+    <title>Avaliação Leitora de Textos Curtos</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,6 +13,12 @@
         }
         label {
             font-weight: bold;
+        }
+        .section {
+            display: none;
+        }
+        .active {
+            display: block;
         }
         .slider-container {
             position: relative;
@@ -46,70 +52,108 @@
         button:hover {
             background-color: #0056b3;
         }
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
     </style>
 </head>
 <body>
 
-    <h2>Avaliação leitora de textos curtos</h2>
+    <h2>Avaliação Leitora de Textos Curtos</h2>
 
-    <!-- Dados demográficos -->
     <form id="surveyForm">
-        <label>Qual a sua idade?</label>
-        <input type="number" name="idade" required><br><br>
+        <!-- Seção de Dados Demográficos -->
+        <div id="section1" class="section active">
+            <h3>Dados Demográficos</h3>
+            <label for="idade">Qual a sua idade?</label>
+            <input type="number" id="idade" name="idade" required><br><br>
 
-        <label>Gênero:</label>
-        <select name="genero" required>
-            <option value="Masculino">Masculino</option>
-            <option value="Feminino">Feminino</option>
-            <option value="Prefiro não informar">Prefiro não informar</option>
-        </select><br><br>
+            <label for="genero">Gênero:</label>
+            <select id="genero" name="genero" required>
+                <option value="Masculino">Masculino</option>
+                <option value="Feminino">Feminino</option>
+                <option value="Prefiro não informar">Prefiro não informar</option>
+            </select><br><br>
 
-        <label>Escolaridade:</label>
-        <select name="escolaridade" required>
-            <option value="Ensino Médio Completo">Ensino Médio Completo</option>
-            <option value="Ensino Superior Incompleto">Ensino Superior Incompleto</option>
-            <option value="Ensino Superior Completo">Ensino Superior Completo</option>
-            <option value="Pós-Graduação">Pós-Graduação</option>
-        </select><br><br>
+            <label for="escolaridade">Escolaridade:</label>
+            <select id="escolaridade" name="escolaridade" required>
+                <option value="Ensino Médio Completo">Ensino Médio Completo</option>
+                <option value="Ensino Superior Incompleto">Ensino Superior Incompleto</option>
+                <option value="Ensino Superior Completo">Ensino Superior Completo</option>
+                <option value="Pós-Graduação">Pós-Graduação</option>
+            </select><br><br>
 
-        <label>Você é falante nativo do português?</label>
-        <select name="nativo" required>
-            <option value="Sim">Sim</option>
-            <option value="Não">Não</option>
-        </select><br><br>
+            <label for="nativo">Você é falante nativo do português?</label>
+            <select id="nativo" name="nativo" required>
+                <option value="Sim">Sim</option>
+                <option value="Não">Não</option>
+            </select><br><br>
 
-        <label>Com que frequência você lê livros ou artigos?</label>
-        <select name="leitura" required>
-            <option value="Diariamente">Diariamente</option>
-            <option value="Semanalmente">Semanalmente</option>
-            <option value="Mensalmente">Mensalmente</option>
-            <option value="Raramente">Raramente</option>
-            <option value="Nunca">Nunca</option>
-        </select><br><br>
+            <label for="leitura">Com que frequência você lê livros ou artigos?</label>
+            <select id="leitura" name="leitura" required>
+                <option value="Diariamente">Diariamente</option>
+                <option value="Semanalmente">Semanalmente</option>
+                <option value="Mensalmente">Mensalmente</option>
+                <option value="Raramente">Raramente</option>
+                <option value="Nunca">Nunca</option>
+            </select><br><br>
 
-        <!-- Texto para avaliação -->
-        <p style="text-align: justify;">
-            Hoje, me despedi de uma pessoa muito importante na minha vida. O enterro foi silencioso, e o peso da ausência tomou conta de mim. 
-            As lágrimas vieram sem que eu pudesse controlá-las. Senti como se uma parte de mim tivesse sido arrancada, deixando um buraco que nunca mais será preenchido. 
-            Enquanto as pessoas ao redor também choravam, eu tentava entender como seguir em frente sem aquela pessoa ao meu lado.
-        </p>
-
-        <!-- Escala deslizante -->
-        <label>Como você avalia a emoção evocada por este texto?</label>
-        <div class="slider-container">
-            <input type="range" min="1" max="10" step="0.1" name="avaliacao_texto1" class="slider">
-            <div class="scale-labels">
-                <span>Negativa</span>
-                <span>Positiva</span>
+            <div class="navigation-buttons">
+                <button type="button" onclick="nextSection(2)">Próxima Seção</button>
             </div>
-        </div><br><br>
+        </div>
 
-        <button type="button" onclick="enviarRespostas()">Enviar Respostas</button>
+        <!-- Seção de Avaliação do Texto -->
+        <div id="section2" class="section">
+            <h3>Avaliação do Texto</h3>
+            <p style="text-align: justify;">
+                Hoje, me despedi de uma pessoa muito importante na minha vida. O enterro foi silencioso, e o peso da ausência tomou conta de mim. 
+                As lágrimas vieram sem que eu pudesse controlá-las. Senti como se uma parte de mim tivesse sido arrancada, deixando um buraco que nunca mais será preenchido. 
+                Enquanto as pessoas ao redor também choravam, eu tentava entender como seguir em frente sem aquela pessoa ao meu lado.
+            </p>
+
+            <label for="avaliacao_texto1">Como você avalia a emoção evocada por este texto?</label>
+            <div class="slider-container">
+                <input type="range" id="avaliacao_texto1" name="avaliacao_texto1" min="0" max="10" step="0.1" class="slider">
+                <div class="scale-labels">
+                    <span>Negativa</span>
+                    <span>Positiva</span>
+                </div>
+            </div><br><br>
+
+            <div class="navigation-buttons">
+                <button type="button" onclick="prevSection(1)">Voltar</button>
+                <button type="button" onclick="enviarRespostas()">Enviar Respostas</button>
+            </div>
+        </div>
     </form>
 
     <p id="mensagem" style="color: green;"></p>
 
     <script>
+        function nextSection(section) {
+            // Ocultar todas as seções
+            var sections = document.querySelectorAll(".section");
+            sections.forEach(function(section) {
+                section.classList.remove("active");
+            });
+
+            // Exibir a próxima seção
+            document.getElementById("section" + section).classList.add("active");
+        }
+
+        function prevSection(section) {
+            // Ocultar todas as seções
+            var sections = document.querySelectorAll(".section");
+            sections.forEach(function(section) {
+                section.classList.remove("active");
+            });
+
+            // Exibir a seção anterior
+            document.getElementById("section" + section).classList.add("active");
+        }
+
         function enviarRespostas() {
             var form = document.getElementById("surveyForm");
             var formData = new FormData(form);
@@ -139,6 +183,7 @@
 
 </body>
 </html>
+
 
 
 
