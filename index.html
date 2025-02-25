@@ -115,7 +115,7 @@
 
             <label for="avaliacao_texto1">Como você avalia a emoção evocada por este texto?</label>
             <div class="slider-container">
-                <input type="range" id="avaliacao_texto1" name="avaliacao_texto1" min="0" max="10" step="0.1" class="slider">
+                <input type="range" id="avaliacao_texto1" name="avaliacao_texto1" min="0" max="10" step="0.1" class="slider" onchange="updateScore()">
                 <div class="scale-labels">
                     <span>Negativa</span>
                     <span>Positiva</span>
@@ -142,6 +142,12 @@
             document.getElementById("section" + section).classList.add("active");
         }
 
+        function updateScore() {
+            // Atualiza a pontuação mostrada no slider em tempo real
+            var score = document.getElementById("avaliacao_texto1").value;
+            console.log("Pontuação da escala:", score); // Verificando se o valor está sendo capturado corretamente
+        }
+
         function enviarRespostas() {
             var form = document.getElementById("surveyForm");
             var formData = new FormData(form);
@@ -154,6 +160,8 @@
             // Captura a pontuação da escala de 0 a 10 com incrementos de 0.1
             var pontuacao = parseFloat(document.getElementById("avaliacao_texto1").value); // Captura o valor do slider
             dados["Texto 1"] = pontuacao;  // Alterado para "Texto 1" para enviar a pontuação para a coluna correta
+
+            console.log(dados); // Verificar se os dados estão sendo preparados corretamente
 
             // Enviar para Google Sheets
             fetch("https://script.google.com/macros/s/AKfycbzDYVPGU9TAJLxcJkyRpKQW5RV97zpCkCL-LAU_Xo5h2KKxKb_EH24zQApRIA9tMTf1/exec", {
