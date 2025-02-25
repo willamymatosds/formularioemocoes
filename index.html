@@ -152,8 +152,8 @@
             });
 
             // Captura a pontuação da escala de 0 a 10
-            var pontuacao = parseFloat(document.getElementById("avaliacao_texto1").value);
-            dados["pontuacao"] = pontuacao;
+            var pontuacao = document.getElementById("avaliacao_texto1").value; // Aqui capturamos o valor da escala
+            dados["pontuacao"] = pontuacao;  // Adicionamos ao objeto de dados
 
             // Enviar para Google Sheets
             fetch("https://script.google.com/macros/s/AKfycbzDYVPGU9TAJLxcJkyRpKQW5RV97zpCkCL-LAU_Xo5h2KKxKb_EH24zQApRIA9tMTf1/exec", {
@@ -175,6 +175,7 @@
 
 </body>
 </html>
+
 
 
 
